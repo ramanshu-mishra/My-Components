@@ -6,6 +6,7 @@ export default function OTP(
 const [otparray, setOtparray] = useState(Array(number).fill(""));
     const refs = useRef(Array.from({length : number}, ()=>createRef()));
 
+     otparray.forEach(e=>console.log(e));
 
 return (
     <div className = 'flex'>
@@ -36,8 +37,8 @@ function OtpBox({reference, goNext, goBack, index, otparray, setOtparray}){
     let newotparray = [...otparray];
     
     return (
-        <div className="m-1 rounded-full border-2 outline-none border-solid border-red-500">
-        <input className = "rounded-full outline-none px-4 w-[40px] h-[50px]" value = {preval?preval:val} ref = {reference} type = "text" 
+        <div className="m-1 rounded-full border-2 outline-none border-solid shadow-[isnet_0px_0px_20px_5px_#c05621] bg-[#c05621]">
+        <input className = "rounded-md outline-none px-4 w-[40px] h-[50px] font-[Oswald]  " value = {preval!=""?preval:val} ref = {reference} type = "text" 
         
         onPaste={e=>{
             const data = e.clipboardData.getData("text");
@@ -50,9 +51,8 @@ function OtpBox({reference, goNext, goBack, index, otparray, setOtparray}){
                 }
                
             }
+           
             setOtparray(newotparray);
-            
-
         }}
         onKeyDown= {(e)=>{
             if(e.key == 'Backspace'){
@@ -63,7 +63,7 @@ function OtpBox({reference, goNext, goBack, index, otparray, setOtparray}){
                 goBack();
             }
         }}onChange={(e)=>{
-            const str = e.target.value[e.target.value.length -1];
+            const str = e.target.value;
             if(parseInt(str)>=0 && parseInt(str)<10){
                 newotparray[index] = str;
                 setOtparray(newotparray);
